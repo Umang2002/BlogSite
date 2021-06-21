@@ -6,7 +6,7 @@ const userSlice = createSlice({
     initialState: {
         isSignedIn: false,
         userData: null,
-        serachInput: "tech",
+        searchInput: "tech",
         blogData: null,
 
     },
@@ -18,7 +18,7 @@ const userSlice = createSlice({
             state.userData = action.payload;
         },
         setInput: (state, action) => {
-            state.serachInput = action.payload;
+            state.searchInput = action.payload;
         },
         setBlogData: (state, action) => {
             state.blogData = action.payload;

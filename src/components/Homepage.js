@@ -1,14 +1,21 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import GoogleLogin from 'react-google-login'
-import { useSelector } from 'react-redux'
-import { selectSignedIn } from '../fetures/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectSignedIn, setSignedIn, setUserData } from '../fetures/userSlice'
 import '../styling/home.css'
 
 function Homepage() {
 
+ const dispatch = useDispatch();
  const login = (res) => {
-     console.log(res)
+     console.log(res);
+     
+     dispatch(setSignedIn(true))
+     dispatch(setUserData(res.profileObj))
+ }
+ const loginFailed = (res)=> {
+     dispatch(setSignedIn(false))
  }
 
   const isSignedIn = useSelector(selectSignedIn);
@@ -32,7 +39,7 @@ function Homepage() {
                     
                     )}
                     onSuccess ={login}
-                    onFailure={login}
+                    onFailure={loginFailed}
                     isSignedIn={true}
                     cookiePolicy={'single_host_origin'}
                 />
